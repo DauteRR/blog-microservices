@@ -12,7 +12,7 @@ app.get('/posts', (req, res: Response<PostsRepository>) => {
   res.send(posts);
 });
 
-app.post('/posts', (req: Request<{}, {}, Post>, res) => {
+app.post('/posts', (req: Request<{}, {}, Post>, res: Response<Post>) => {
   const id = randomBytes(4).toString('hex');
   const { title } = req.body;
 
