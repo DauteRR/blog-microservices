@@ -9,43 +9,47 @@ import { Field, FieldProps, Formik } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
 
-interface Props {}
-
-interface PostCreationValues {
-  title: string;
+interface CommentCreationValues {
+  content: string;
 }
 
-export const PostCreate: React.FC<Props> = () => {
+interface Props {
+  postID: string;
+}
+
+export const CommentCreate: React.FC<Props> = ({ postID }) => {
   return (
-    <Formik<PostCreationValues>
+    <Formik<CommentCreationValues>
       initialValues={{
-        title: ''
+        content: ''
       }}
       validationSchema={Yup.object({
-        title: Yup.string().min(3).max(50).required()
+        content: Yup.string().required()
       })}
       onSubmit={async (values, actions) => {
-        await fetch('http://localhost:4000/posts', {
+        await fetch(`http://localhost:4001/posts/${postID}/comments`, {
           method: 'POST',
-          body: JSON.stringify({ title: values.title }),
+          body: JSON.stringify({ content: values.content }),
           headers: {
             'Content-Type': 'application/json'
           }
         });
+
         actions.setSubmitting(false);
-        actions.setValues({ title: '' });
+        actions.setValues({ content: '' });
       }}>
       {props => (
         <form onSubmit={props.handleSubmit}>
-          <Field name="title">
+          <Field name="content">
             {({ field, form }: FieldProps) => (
               <FormControl
                 isInvalid={
-                  form.errors.title !== undefined && form.touched.title === true
+                  form.errors.content !== undefined &&
+                  form.touched.content === true
                 }>
-                <FormLabel htmlFor="title">Title</FormLabel>
-                <Input {...field} id="title" />
-                <FormErrorMessage>{form.errors.title}</FormErrorMessage>
+                <FormLabel htmlFor="content">New comment</FormLabel>
+                <Input {...field} id="content" />
+                <FormErrorMessage>{form.errors.content}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
@@ -62,4 +66,4 @@ export const PostCreate: React.FC<Props> = () => {
   );
 };
 
-export default PostCreate;
+export default CommentCreate;

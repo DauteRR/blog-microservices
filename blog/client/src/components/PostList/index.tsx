@@ -43,7 +43,7 @@ const PostList: React.FC<Props> = () => {
     content = (
       <Grid
         width="100%"
-        templateColumns="repeat(3, 1fr)"
+        templateColumns="repeat(2, 1fr)"
         gap={customTheme.space[2]}>
         {Object.values(posts).map(post => (
           <PostCard key={post.id} post={post} />
