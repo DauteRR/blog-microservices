@@ -25,11 +25,13 @@ export const PostCreate: React.FC<Props> = () => {
         title: Yup.string().min(3).max(50)
       })}
       onSubmit={async (values, actions) => {
-        const response = await fetch('http://localhost:4000/posts', {
+        await fetch('http://localhost:4000/posts', {
           method: 'POST',
-          body: JSON.stringify({ title: values.title })
+          body: JSON.stringify({ title: values.title }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
         });
-        console.log(response);
         actions.setSubmitting(false);
         actions.setValues({ title: '' });
       }}>

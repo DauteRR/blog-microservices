@@ -1,8 +1,9 @@
-import { Box, CSSReset, Flex, Heading } from '@chakra-ui/core';
+import { Box, CSSReset, Divider, Flex, Heading } from '@chakra-ui/core';
 import React from 'react';
 import { PostCreate } from '../PostCreate';
 import { theme } from '@chakra-ui/core';
 import { ThemeProvider } from '@chakra-ui/core';
+import PostList from '../PostList';
 
 export const customTheme = {
   ...theme,
@@ -18,11 +19,13 @@ const App: React.FC<Props> = () => {
     <ThemeProvider theme={customTheme}>
       <CSSReset />
       <Flex justify="center">
-        <Box marginTop={customTheme.space['10']} width={600}>
+        <Box marginTop={customTheme.space[10]} width={600}>
           <Heading marginBottom={customTheme.space['4']} as="h1">
             Create Post
           </Heading>
           <PostCreate />
+          <Divider borderColor="teal.500" />
+          <PostList />
         </Box>
       </Flex>
     </ThemeProvider>
