@@ -33,7 +33,7 @@ export const PostCreate: React.FC<Props> = () => {
           }
         });
         actions.setSubmitting(false);
-        actions.setValues({ title: '' });
+        actions.resetForm();
       }}>
       {props => (
         <form onSubmit={props.handleSubmit}>
@@ -54,7 +54,7 @@ export const PostCreate: React.FC<Props> = () => {
             variantColor="teal"
             isLoading={props.isSubmitting}
             type="submit">
-            Submit
+            Create
           </Button>
         </form>
       )}

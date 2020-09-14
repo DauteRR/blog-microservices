@@ -19,8 +19,8 @@ const App: React.FC<Props> = () => {
     <ThemeProvider theme={customTheme}>
       <CSSReset />
       <Flex justify="center">
-        <Box marginTop={customTheme.space[10]} width={600}>
-          <Heading marginBottom={customTheme.space['4']} as="h1">
+        <Box marginTop={customTheme.space[10]} maxW="6xl">
+          <Heading marginBottom={customTheme.space[6]} as="h1">
             Create Post
           </Heading>
           <PostCreate />

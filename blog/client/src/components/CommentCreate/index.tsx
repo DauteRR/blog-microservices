@@ -36,7 +36,7 @@ export const CommentCreate: React.FC<Props> = ({ postID }) => {
         });
 
         actions.setSubmitting(false);
-        actions.setValues({ content: '' });
+        actions.resetForm();
       }}>
       {props => (
         <form onSubmit={props.handleSubmit}>
@@ -58,7 +58,7 @@ export const CommentCreate: React.FC<Props> = ({ postID }) => {
             variantColor="teal"
             isLoading={props.isSubmitting}
             type="submit">
-            Submit
+            Send
           </Button>
         </form>
       )}

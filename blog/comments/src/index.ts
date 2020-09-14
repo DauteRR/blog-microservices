@@ -13,7 +13,7 @@ const commentsByPostId: CommentRepository = {};
 app.get(
   '/posts/:id/comments',
   (req: Request<URLParams, {}, {}>, res: Response<Comment[]>) => {
-    res.send(commentsByPostId[req.params.id]);
+    res.status(200).send(commentsByPostId[req.params.id] || []);
   }
 );
 
