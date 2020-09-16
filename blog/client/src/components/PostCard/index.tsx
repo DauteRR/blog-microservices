@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const PostCard: React.FC<Props> = ({ post }) => {
-  const { title, id } = post;
+  const { title, id, comments } = post;
 
   return (
     <Box maxW="sm" borderWidth="1px" rounded="lg" overflow="hidden" p="6">
@@ -17,7 +17,7 @@ export const PostCard: React.FC<Props> = ({ post }) => {
         <Heading fontWeight="semibold" isTruncated as="h3" mb={theme.space[2]}>
           {title}
         </Heading>
-        <CommentList postID={id} />
+        <CommentList comments={comments} />
         <CommentCreate postID={id} />
       </Box>
     </Box>
