@@ -6,6 +6,16 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+const contentByStatus = (status: string, content: string) => {
+  if (status === 'pending') {
+    return 'This comment is under a moderation process';
+  } else if (status === 'approved') {
+    return content;
+  } else if (status === 'rejected') {
+    return 'This comment have been rejected';
+  }
+};
+
 const posts: { [key: string]: any } = {};
 
 app.get('/posts', (req, res) => {
@@ -25,10 +35,14 @@ app.post('/events', (req, res) => {
   }
 
   if (type === 'CommentCreated') {
-    const { id, content, postID } = data;
+    const { id, postID, content, status } = data;
 
     const post = posts[postID];
-    post.comments.push({ id, content });
+    post.comments.push({
+      id,
+      content: contentByStatus(status, content),
+      status
+    });
   }
 
   res.send({});
