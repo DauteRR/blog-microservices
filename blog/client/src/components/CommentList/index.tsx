@@ -12,7 +12,11 @@ export const CommentList: React.FC<Props> = ({ comments }) => {
     <Box ml={customTheme.space[4]} mb={customTheme.space[6]}>
       <List styleType="disc">
         {comments.map(comment => (
-          <ListItem key={comment.id}>{comment.content}</ListItem>
+          <ListItem
+            fontStyle={comment.status === 'approved' ? '' : 'italic'}
+            key={comment.id}>
+            {comment.content}
+          </ListItem>
         ))}
       </List>
     </Box>

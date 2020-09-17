@@ -12,7 +12,7 @@ const contentByStatus = (status: string, content: string) => {
   } else if (status === 'approved') {
     return content;
   } else if (status === 'rejected') {
-    return 'This comment have been rejected';
+    return 'This comment has been rejected';
   }
 };
 
@@ -43,6 +43,18 @@ app.post('/events', (req, res) => {
       content: contentByStatus(status, content),
       status
     });
+  }
+
+  if (type === 'CommentUpdated') {
+    const { id, postID, content, status } = data;
+
+    const post = posts[postID];
+    const comment = post.comments.find((comment: any) => comment.id === id);
+
+    if (comment) {
+      comment.status = status;
+      comment.content = contentByStatus(status, content);
+    }
   }
 
   res.send({});
