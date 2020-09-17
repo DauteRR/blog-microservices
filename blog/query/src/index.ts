@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import cors from 'cors';
+import axios from 'axios';
 
 const app = express();
 app.use(bodyParser.json());
@@ -18,13 +19,7 @@ const contentByStatus = (status: string, content: string) => {
 
 const posts: { [key: string]: any } = {};
 
-app.get('/posts', (req, res) => {
-  res.send(posts);
-});
-
-app.post('/events', (req, res) => {
-  const { type, data } = req.body;
-
+const handleEvent = (type: string, data: any) => {
   if (type === 'PostCreated') {
     const { id, title } = data;
     posts[id] = {
@@ -56,11 +51,25 @@ app.post('/events', (req, res) => {
       comment.content = contentByStatus(status, content);
     }
   }
+};
+
+app.get('/posts', (req, res) => {
+  res.send(posts);
+});
+
+app.post('/events', (req, res) => {
+  const { type, data } = req.body;
+
+  handleEvent(type, data);
 
   res.send({});
 });
 
 const port = 4002;
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`Listening on ${port}`);
+
+  const events: any[] = await axios.get('http://localhost:4005/events');
+
+  events.forEach(event => handleEvent(event.type, event.data));
 });
