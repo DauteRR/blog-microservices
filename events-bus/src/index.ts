@@ -15,9 +15,9 @@ app.post('/events', (req: Request, res: Response) => {
   events.push(event);
 
   axios.post('http://posts-srv:4000/events', event);
-  // axios.post('http://localhost:4001/events', event);
-  // axios.post('http://localhost:4002/events', event);
-  // axios.post('http://localhost:4003/events', event);
+  axios.post('http://comments-srv:4001/events', event);
+  axios.post('http://query-srv:4002/events', event);
+  axios.post('http://moderation-srv:4003/events', event);
 
   res.send({ status: 'ok' });
 });
