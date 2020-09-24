@@ -25,7 +25,7 @@ export const PostCreate: React.FC<Props> = () => {
         title: Yup.string().min(3).max(50).required()
       })}
       onSubmit={async (values, actions) => {
-        await fetch('http://posts.com/posts', {
+        await fetch('http://posts.com/posts/create', {
           method: 'POST',
           body: JSON.stringify({ title: values.title }),
           headers: {
