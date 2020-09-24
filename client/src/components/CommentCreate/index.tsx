@@ -27,7 +27,7 @@ export const CommentCreate: React.FC<Props> = ({ postID }) => {
         content: Yup.string().required()
       })}
       onSubmit={async (values, actions) => {
-        await fetch(`http://localhost:4001/posts/${postID}/comments`, {
+        await fetch(`http://posts.com/posts/${postID}/comments`, {
           method: 'POST',
           body: JSON.stringify({ content: values.content }),
           headers: {

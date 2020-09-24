@@ -12,7 +12,7 @@ const PostList: React.FC<Props> = () => {
   const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
-    fetch('http://localhost:4002/posts', {
+    fetch('http://posts.com/posts', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
