@@ -6,8 +6,9 @@ import {
   Input
 } from '@chakra-ui/core';
 import { Field, FieldProps, Formik } from 'formik';
-import React from 'react';
+import React, { useContext } from 'react';
 import * as Yup from 'yup';
+import { ReloadContext } from '../../contexts/Reload';
 
 interface CommentCreationValues {
   content: string;
@@ -18,6 +19,8 @@ interface Props {
 }
 
 export const CommentCreate: React.FC<Props> = ({ postID }) => {
+  const { dispatch } = useContext(ReloadContext);
+
   return (
     <Formik<CommentCreationValues>
       initialValues={{
@@ -35,6 +38,7 @@ export const CommentCreate: React.FC<Props> = ({ postID }) => {
           }
         });
 
+        dispatch({ type: 'SET_RELOAD_NEEDED', reloadNeeded: true });
         actions.setSubmitting(false);
         actions.resetForm();
       }}>

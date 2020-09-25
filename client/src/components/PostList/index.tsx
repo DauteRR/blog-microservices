@@ -1,5 +1,6 @@
 import { Flex, Grid, Icon, Spinner, theme } from '@chakra-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { ReloadContext } from '../../contexts/Reload';
 import { Post } from '../../typings';
 import { customTheme } from '../App';
 import { PostCard } from '../PostCard';
@@ -10,8 +11,14 @@ const PostList: React.FC<Props> = () => {
   const [posts, setPosts] = useState<{ [key: string]: Post }>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
+  const {
+    dispatch,
+    state: { reloadNeeded }
+  } = useContext(ReloadContext);
 
   useEffect(() => {
+    if (!reloadNeeded) return;
+
     fetch('http://posts.com/posts', {
       method: 'GET',
       headers: {
@@ -19,11 +26,12 @@ const PostList: React.FC<Props> = () => {
       }
     })
       .then(response => {
+        dispatch({ type: 'SET_RELOAD_NEEDED', reloadNeeded: false });
         response.json().then(posts => setPosts(posts));
       })
       .catch(error => setError(true))
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [reloadNeeded, dispatch]);
 
   let content: JSX.Element = <></>;
 

@@ -6,8 +6,9 @@ import {
   Input
 } from '@chakra-ui/core';
 import { Field, FieldProps, Formik } from 'formik';
-import React from 'react';
+import React, { useContext } from 'react';
 import * as Yup from 'yup';
+import { ReloadContext } from '../../contexts/Reload';
 
 interface Props {}
 
@@ -16,6 +17,7 @@ interface PostCreationValues {
 }
 
 export const PostCreate: React.FC<Props> = () => {
+  const { dispatch } = useContext(ReloadContext);
   return (
     <Formik<PostCreationValues>
       initialValues={{
@@ -32,6 +34,7 @@ export const PostCreate: React.FC<Props> = () => {
             'Content-Type': 'application/json'
           }
         });
+        dispatch({ type: 'SET_RELOAD_NEEDED', reloadNeeded: true });
         actions.setSubmitting(false);
         actions.resetForm();
       }}>
