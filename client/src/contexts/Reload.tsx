@@ -24,7 +24,7 @@ interface ReloadContextState {
 }
 
 const DefaultReloadContextState: ReloadContextState = {
-  reloadNeeded: true
+  reloadNeeded: false
 };
 
 interface ReloadContext {

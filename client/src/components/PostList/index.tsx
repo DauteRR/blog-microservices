@@ -1,5 +1,5 @@
 import { Flex, Grid, Icon, Spinner, theme } from '@chakra-ui/core';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { ReloadContext } from '../../contexts/Reload';
 import { Post } from '../../typings';
 import { customTheme } from '../App';
@@ -16,9 +16,7 @@ const PostList: React.FC<Props> = () => {
     state: { reloadNeeded }
   } = useContext(ReloadContext);
 
-  useEffect(() => {
-    if (!reloadNeeded) return;
-
+  const fetchPosts = useCallback(() => {
     fetch('http://posts.com/posts', {
       method: 'GET',
       headers: {
@@ -31,7 +29,15 @@ const PostList: React.FC<Props> = () => {
       })
       .catch(error => setError(true))
       .finally(() => setIsLoading(false));
-  }, [reloadNeeded, dispatch]);
+  }, [dispatch]);
+
+  useEffect(fetchPosts, []);
+
+  useEffect(() => {
+    console.log('reloadNeeded effect', reloadNeeded);
+    if (!reloadNeeded) return;
+    fetchPosts();
+  }, [fetchPosts, reloadNeeded]);
 
   let content: JSX.Element = <></>;
 

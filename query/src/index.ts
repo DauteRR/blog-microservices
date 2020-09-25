@@ -72,5 +72,7 @@ app.listen(port, async () => {
 
   const events: any[] = await axios.get('http://events-bus-srv:4005/events');
 
-  events.forEach(event => handleEvent(event.type, event.data));
+  console.log(events.constructor.name);
+
+  if (events) events.forEach(event => handleEvent(event.type, event.data));
 });
