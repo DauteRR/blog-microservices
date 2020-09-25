@@ -70,7 +70,7 @@ const port = 4002;
 app.listen(port, async () => {
   console.log(`Listening on ${port}`);
 
-  const events: any[] = await axios.get('http://event-bus-srv:4005/events');
+  const events: any[] = await axios.get('http://events-bus-srv:4005/events');
 
   events.forEach(event => handleEvent(event.type, event.data));
 });
