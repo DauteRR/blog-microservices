@@ -70,8 +70,12 @@ const port = 4002;
 app.listen(port, async () => {
   console.log(`Listening on ${port}`);
 
-  const events: any[] = await axios.get('http://events-bus-srv:4005/events');
+  try {
+    const events: any[] = await axios.get('http://events-bus-srv:4005/events');
 
-  if (events && events.forEach)
-    events.forEach(event => handleEvent(event.type, event.data));
+    if (events && events.forEach)
+      events.forEach(event => handleEvent(event.type, event.data));
+  } catch (error) {
+    console.error('Error connecting to events-bus-srv');
+  }
 });
