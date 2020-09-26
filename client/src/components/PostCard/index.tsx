@@ -1,6 +1,6 @@
 import { Box, Heading, theme } from '@chakra-ui/core';
 import React from 'react';
-import { Post } from '../../typings';
+import { Post } from '../../types';
 import { CommentCreate } from '../CommentCreate';
 import { CommentList } from '../CommentList';
 

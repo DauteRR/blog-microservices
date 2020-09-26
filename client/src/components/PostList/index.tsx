@@ -1,7 +1,7 @@
 import { Flex, Grid, Icon, Spinner, theme } from '@chakra-ui/core';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { ReloadContext } from '../../contexts/Reload';
-import { Post } from '../../typings';
+import { Post } from '../../types';
 import { customTheme } from '../App';
 import { PostCard } from '../PostCard';
 

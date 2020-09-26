@@ -1,6 +1,6 @@
 import { Box, List, ListItem, Tag, TagIcon } from '@chakra-ui/core';
 import React from 'react';
-import { Comment } from '../../typings';
+import { Comment } from '../../types';
 import { customTheme } from '../App';
 
 type CommentTagByStatusType = { [key in Comment['status']]: JSX.Element };

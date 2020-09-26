@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser';
 import { randomBytes } from 'crypto';
 import express, { Request, Response } from 'express';
-import { Post, PostsRepository } from './typings';
+import { Post, PostsRepository } from './types';
 import cors from 'cors';
 import axios from 'axios';
 
