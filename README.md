@@ -34,10 +34,8 @@ $ skaffold dev
 
 In order to stop Skaffold press ctrl + C in the terminal
 
-3. Add a temporary line to yout hosts file:
+3. Add a temporary line to hosts file (replace ip_address with the result of running minikube ip):
 
-> 127.0.0.1 posts.com
-
-If you are using Minikube, 127.0.0.1 should be replaced with the result of runing \$ minikube ip.
+> ip_address posts.com
 
 4. Type posts.com in your browser and hopefully, you will see a dummy web application
